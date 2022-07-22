@@ -1,0 +1,181 @@
+﻿<MiningStructure xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="29e3c6bd-b66f-4a16-bcfe-a261b8da5aa8" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Association Rules</ID>
+  <Name>Association Rules</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>MDXFilterComponent</Name>
+      <Value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;Filter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/SQLServer/reporting/QuerySpecification"&gt;&lt;FilterItems xmlns="http://schemas.microsoft.com/AnalysisServices/QueryDefinition" /&gt;&lt;/Filter&gt;</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <Source xsi:type="CubeDimensionBinding" dwd:design-time-name="61ad18b0-0d83-4e90-ad2c-b9753150dc5a">
+    <DataSourceID>.</DataSourceID>
+    <CubeID>Movie Industry</CubeID>
+    <CubeDimensionID>Dim Film</CubeDimensionID>
+    <Filter></Filter>
+  </Source>
+  <Columns>
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="146b6ce1-e7ab-4aed-a379-5b739460e00b">
+      <ID>Film Id</ID>
+      <Name>Film Id</Name>
+      <IsKey>true</IsKey>
+      <Type>Long</Type>
+      <Source xsi:type="CubeAttributeBinding" dwd:design-time-name="69c88e88-a4b6-4219-a166-faddf2e7c5f3">
+        <CubeID>Movie Industry</CubeID>
+        <CubeDimensionID>Dim Film</CubeDimensionID>
+        <AttributeID>Film Id</AttributeID>
+        <Type>All</Type>
+      </Source>
+      <Content>Key</Content>
+    </Column>
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="07d79c1c-d707-4f76-b66a-de2d3c433cd4">
+      <ID>Genre</ID>
+      <Name>Genre</Name>
+      <Type>Text</Type>
+      <Source xsi:type="CubeAttributeBinding" dwd:design-time-name="3b9afdb6-39af-4daa-8da6-90bd579f99a3">
+        <CubeID>Movie Industry</CubeID>
+        <CubeDimensionID>Dim Film</CubeDimensionID>
+        <AttributeID>Genre</AttributeID>
+        <Type>All</Type>
+      </Source>
+      <Content>Discrete</Content>
+    </Column>
+    <Column xsi:type="ScalarMiningStructureColumn" dwd:design-time-name="b9007a9e-eddd-4148-a6c4-e204d1ddbe9a">
+      <ID>Rating</ID>
+      <Name>Rating</Name>
+      <Type>Text</Type>
+      <Source xsi:type="CubeAttributeBinding" dwd:design-time-name="837dcf3a-f95a-47f2-b579-f2620e04453c">
+        <CubeID>Movie Industry</CubeID>
+        <CubeDimensionID>Dim Film</CubeDimensionID>
+        <AttributeID>Rating</AttributeID>
+        <Type>All</Type>
+      </Source>
+      <Content>Discrete</Content>
+    </Column>
+  </Columns>
+  <MiningModels>
+    <MiningModel dwd:design-time-name="d61342db-8c84-45bd-a1db-a29fb6ea0be7">
+      <ID>Association Rules</ID>
+      <Name>Association Rules</Name>
+      <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+      <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+      <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+      <State>Unprocessed</State>
+      <Algorithm>Microsoft_Association_Rules</Algorithm>
+      <Columns>
+        <Column dwd:design-time-name="f4bc0b14-e611-43a2-ab94-3b5b6eb95808">
+          <ID>Film Id</ID>
+          <Name>Film Id</Name>
+          <SourceColumnID>Film Id</SourceColumnID>
+          <Usage>Key</Usage>
+        </Column>
+        <Column dwd:design-time-name="391f8be1-e8cd-4af7-a587-1534671ff2d9">
+          <ID>Genre</ID>
+          <Name>Genre</Name>
+          <SourceColumnID>Genre</SourceColumnID>
+        </Column>
+        <Column dwd:design-time-name="eea28d76-fa80-4f8e-9da3-5b787928d20a">
+          <ID>Rating</ID>
+          <Name>Rating</Name>
+          <SourceColumnID>Rating</SourceColumnID>
+          <Usage>PredictOnly</Usage>
+        </Column>
+      </Columns>
+    </MiningModel>
+    <MiningModel dwd:design-time-name="b11117d8-bbd2-4412-ac50-c56616429fb2">
+      <ID>Clustering</ID>
+      <Name>Clustering</Name>
+      <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+      <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+      <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+      <State>Unprocessed</State>
+      <Algorithm>Microsoft_Clustering</Algorithm>
+      <Columns>
+        <Column dwd:design-time-name="7e2515f3-57d0-41a5-8609-5ef80ceaac6b">
+          <ID>Film Id</ID>
+          <Name>Film Id</Name>
+          <SourceColumnID>Film Id</SourceColumnID>
+          <Usage>Key</Usage>
+        </Column>
+        <Column dwd:design-time-name="a87d9da4-5582-4a9e-86e0-b7203aaffff6">
+          <ID>Genre</ID>
+          <Name>Genre</Name>
+          <SourceColumnID>Genre</SourceColumnID>
+        </Column>
+        <Column dwd:design-time-name="8ad69644-efce-404c-baf4-01e2d33dec93">
+          <ID>Rating</ID>
+          <Name>Rating</Name>
+          <SourceColumnID>Rating</SourceColumnID>
+          <Usage>PredictOnly</Usage>
+        </Column>
+      </Columns>
+    </MiningModel>
+    <MiningModel dwd:design-time-name="c0443306-d328-469d-aab2-0332c589c2e1">
+      <ID>Neural Network</ID>
+      <Name>Neural Network</Name>
+      <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+      <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+      <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+      <State>Unprocessed</State>
+      <Algorithm>Microsoft_Neural_Network</Algorithm>
+      <Columns>
+        <Column dwd:design-time-name="52a296c4-0afe-4f33-8b8c-0b2fd64ee110">
+          <ID>Film Id</ID>
+          <Name>Film Id</Name>
+          <SourceColumnID>Film Id</SourceColumnID>
+          <Usage>Key</Usage>
+        </Column>
+        <Column dwd:design-time-name="b454de4c-f9f2-4832-bf13-679f6932ce72">
+          <ID>Genre</ID>
+          <Name>Genre</Name>
+          <SourceColumnID>Genre</SourceColumnID>
+        </Column>
+        <Column dwd:design-time-name="423b1f55-6ba7-4ce5-bdb3-3715314f8ca6">
+          <ID>Rating</ID>
+          <Name>Rating</Name>
+          <SourceColumnID>Rating</SourceColumnID>
+          <Usage>PredictOnly</Usage>
+        </Column>
+      </Columns>
+    </MiningModel>
+  </MiningModels>
+  <ddl100_100:HoldoutMaxPercent>30</ddl100_100:HoldoutMaxPercent>
+</MiningStructure>
