@@ -1,0 +1,113 @@
+﻿//a. Cho biết tổng doanh thu đạt được của các bộ phim ở nước Mĩ (United State) theo từng năm.
+
+SELECT NON EMPTY { [Measures].[Gross] } ON COLUMNS, 
+NON EMPTY { ([Dim Time].[Year].MEMBERS ) } ON ROWS 
+FROM [Movie Industry] 
+WHERE [Dim Film].[Country].&[United States];
+
+
+//b. Cho biết thông tin bộ phim đạt được doanh thu cao nhất trong quý 2 năm 2016 của nước Anh (United Kingdom).
+
+SELECT NON EMPTY { [Measures].[Gross] } ON COLUMNS, 
+{TOPCOUNT( [Dim Film].[Name].CHILDREN * [Dim Film].[Rating].CHILDREN * [Dim Film].[Genre].CHILDREN, 1, [Measures].[Gross] )} ON ROWS 
+FROM [Movie Industry] 
+WHERE ({[Dim Film].[Country].&[United Kingdom]}, {[Dim Time].[Quarter].&[2]&[2016]});
+
+//c. Đếm số lượng bộ phim được sản xuất theo từng quốc gia.
+
+SELECT NON EMPTY { [Measures].[Fact Table Count] } ON COLUMNS, 
+NON EMPTY { [Dim Film].[Country].CHILDREN } ON ROWS 
+FROM [Movie Industry];
+
+//d. Liệt kê bộ phim có kinh phí đầu tư thấp nhất và bộ phím có kinh phí đầu tư cao nhất và in ra số điểm của 2 bộ phim đó.
+
+SELECT { [Measures].[Budget], [Measures].[Score] } ON COLUMNS, 
+{UNION(TOPCOUNT( NONEMPTY([Dim Film].[Name].CHILDREN), 1, [Measures].[Score]), 
+BOTTOMCOUNT( NONEMPTY( [Dim Film].[Name].CHILDREN), 1, [Measures].[Score] ))} ON ROWS 
+FROM [Movie Industry];
+
+//e. Thống kê kinh phí đầu tư, doanh thu và thông tin các bộ phim thành công (kinh phí < doanh thu).
+
+SELECT NON EMPTY [Dim Film].[Genre].CHILDREN * [Dim Film].[Name].CHILDREN
+HAVING [Measures].[Gross] > [Measures].[Budget] ON ROWS, 
+NON EMPTY { [Measures].[Budget], [Measures].[Gross] } ON COLUMNS 
+FROM [Movie Industry];
+
+//f. Đưa ra top 3 thể loại có số lượng phim nhiều nhất trong năm 2016.
+
+SELECT NON EMPTY { [Measures].[Fact Table Count] } ON COLUMNS, 
+NON EMPTY {TOPCOUNT( [Dim Film].[Genre].CHILDREN, 3, [Measures].[Fact Table Count] )} ON ROWS
+FROM [Movie Industry];
+
+//g. Tìm ra đạo diễn có bộ phim đạt doanh thu cao nhất.
+
+SELECT NON EMPTY { [Measures].[Gross] } ON COLUMNS, 
+{TOPCOUNT( [Dim Film].[Director].CHILDREN * [Dim Film].[Name].CHILDREN, 1, [Measures].[Gross] )} ON ROWS 
+FROM [Movie Industry];
+
+//h. Đưa ra top 3 bộ phim được yêu thích nhất 3 năm gần đây (dựa theo số điểm).
+
+SELECT { [Measures].[Score] } ON COLUMNS, 
+{TOPCOUNT( [Dim Film].[Name].CHILDREN * [Dim Film].[Rating].CHILDREN 
+* [Dim Film].[Genre].CHILDREN * [Dim Time].[Year].CHILDREN, 3, [Measures].[Score] )} ON ROWS 
+FROM (
+	SELECT { [Measures].[Score] } ON COLUMNS, 
+	{TAIL( NONEMPTY([Dim Time].[Year].CHILDREN), 3)} ON ROWS 
+	FROM [Movie Industry]);
+
+//i. Thống kê các bộ phim có thời lượng chiếu trên 180 phút và có số điểm đạt được trên 8.
+
+SELECT NON EMPTY FILTER( [Dim Film].[Name].CHILDREN,
+[Measures].[Runtime] > 180 and [Measures].[Score] > 8.0) ON ROWS, 
+NON EMPTY { [Measures].[Runtime], [Measures].[Score] } ON COLUMNS 
+FROM [Movie Industry];
+
+//j. Theo từng tháng, quý, năm liệt kê số lượng bộ phim được khởi chiếu trong 3 năm gần đây nhất.
+
+SELECT NON EMPTY { [Measures].[Fact Table Count] } ON COLUMNS,
+{DRILLDOWNLEVEL(
+	DRILLDOWNLEVEL(
+		DRILLDOWNLEVEL(
+		[Dim Time].[PhanCap])
+		)
+	)
+} ON ROWS
+FROM (
+	SELECT { [Measures].[Fact Table Count] } ON COLUMNS, 
+	{TAIL( NONEMPTY([Dim Time].[Year].CHILDREN), 3)} ON ROWS 
+	FROM [Movie Industry]);
+
+//k. Liệt kê top 5 những bộ phim có kinh phí đầu tư cao nhất hoặc top 3 có số điểm cao nhất.
+
+SELECT NON EMPTY { [Measures].[Budget], [Measures].[Score] } ON COLUMNS, 
+{UNION(TOPCOUNT( [Dim Film].[Name].CHILDREN , 5, [Measures].[Budget] ),
+TOPCOUNT( [Dim Film].[Name].CHILDREN , 3, [Measures].[Score] ))} ON ROWS 
+FROM [Movie Industry];
+
+//l. Đưa ra top 3 diễn viên có số lượng bộ phim được vào vai nhiều nhất.
+
+SELECT NON EMPTY { [Measures].[Fact Table Count] } ON COLUMNS, 
+{TOPCOUNT( [Dim Film].[Star].CHILDREN, 3, [Measures].[Fact Table Count] )} ON ROWS 
+FROM [Movie Industry];
+
+//m. Liệt kê những bộ phim có doanh thu từ $1000000 đến $3000000.
+
+SELECT { [Measures].[Gross] } ON COLUMNS,
+{INTERSECT( 
+{FILTER([Dim Film].[Name].CHILDREN , [Measures].[Gross] >= 1000000)}
+,{FILTER([Dim Film].[Name].CHILDREN , [Measures].[Gross] <= 3000000)}
+)} ON ROWS 
+FROM [Movie Industry];
+
+//n. Đưa ra 3 thể loại được quan tâm nhất (dựa theo số lượng vote).
+
+SELECT NON EMPTY { [Measures].[Votes] } ON COLUMNS, 
+{TOPCOUNT( [Dim Film].[Genre].CHILDREN, 3, [Measures].[Votes] )} ON ROWS 
+FROM [Movie Industry];
+
+//o. Đưa ra top 3 bộ phim được yêu thích nhất mọi thời đại
+
+SELECT NON EMPTY { [Measures].[Score] } ON COLUMNS, 
+{TOPCOUNT( [Dim Film].[Name].CHILDREN * [Dim Film].[Rating].CHILDREN 
+* [Dim Film].[Genre].CHILDREN * [Dim Time].[Year].CHILDREN, 3, [Measures].[Score] )} ON ROWS 
+FROM [Movie Industry];
