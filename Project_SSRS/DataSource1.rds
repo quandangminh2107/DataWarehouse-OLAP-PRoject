@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="DataSource1">
+  <ConnectionProperties>
+    <Extension>OLEDB-MD</Extension>
+    <ConnectString />
+  </ConnectionProperties>
+  <DataSourceID>6875ad31-e8dd-4a19-bdd7-b8eb8dfd5a8c</DataSourceID>
+</RptDataSource>
